@@ -1,0 +1,112 @@
+<html>
+<head>
+<style>
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: center;
+    padding: 5px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+
+</style>
+
+<link href="http://fonts.googleapis.com/css?family=Arvo:400,700" rel="stylesheet" type="text/css" />
+<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="style.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+<div id="wrapper">
+	<div id="wrapper-bgtop">
+		<div id="header-wrapper">
+			<div id="header">
+				<div id="logo">
+					<h1><a href="#">Football Team</a></h1>
+				</div>
+				<div id="menu">
+					<ul>
+					<li><a href="index.html" class="active">HOME</a></li>
+					<li><a href="about.html">GOODS</a></li>
+					<li><a href="contactus.html">CONTACT US</a></li>
+					<li><a href="updatepass.php">UPDATE</a></li>
+					
+					</ul>
+				</div>
+			</div>
+		</div>
+	
+		<div id="page" class="container">
+			<div id="content">
+				<div>
+		
+
+
+<link rel="stylesheet" type="text/css"  href="e1.css">
+<body>
+<h1> THE USERS </h1> 
+<?php
+    /* Connecting, selecting database */
+    $link = mysql_connect("localhost", "root","root")
+        or die("Could not connect");
+    //echo "Connected successfully";
+    mysql_select_db("no7") or die("Could not select database");
+
+    /* Performing SQL query */
+    $query = "SELECT * FROM register";
+    $result = mysql_query($query) or die("Query failed");
+
+    /* Printing results in HTML */
+
+
+	echo "<table >\n";
+	echo "<tr>\n";
+	echo "<th>Name</th>\n";
+	echo "<th>Position</th>\n";
+	echo "<th>Email</th>\n";
+	echo "<th>Phone Number";
+	echo "<th>Password</th>\n";
+	echo "<th>Age</th>\n";
+	echo "<th>Country</th>\n";
+
+	echo "<tr>\n";
+
+
+
+
+
+
+
+
+
+ 
+    
+    while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
+        echo "\t<tr>\n";
+        foreach ($line as $col_value) {
+            echo "\t\t<td>$col_value</td>\n";
+        }
+        echo "\t</tr>\n";
+    }
+    echo "</table>\n";
+
+    /* Free resultset */
+    mysql_free_result($result);
+
+    /* Closing connection */
+    mysql_close($link);
+?>
+</body>
+</html>

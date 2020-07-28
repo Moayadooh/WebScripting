@@ -1,0 +1,9 @@
+<?php
+function web($name,$year){
+	echo"$name Refsnse. Born in $year<br>";
+}
+
+web("Amani","1975");
+web("Aysha","1978");
+web("Haitham","1983");
+?>

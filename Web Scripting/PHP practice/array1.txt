@@ -1,0 +1,7 @@
+<?php
+
+$food = array("Chocolate","Icecream","Pizza");
+
+echo "I like ".$food[0].", ".$food[1].", ".$food[02];
+
+?>

@@ -1,0 +1,9 @@
+<?php
+$txt1 = "Muscat College";
+$txt2 = "Muscat College.edu.om";
+$txt3 = array("UMP","Stirling","SQA");
+
+echo $txt1."<br>";
+echo "I Study at $txt2 <br>";
+echo "My university is {$txt3[0]}";
+?>

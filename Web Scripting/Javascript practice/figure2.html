@@ -1,0 +1,46 @@
+
+<html>
+ <head>
+  <title>Sample Web Page</title>
+ </head>
+ <script>
+ function sum()
+ {
+	 var number1,number2;
+	 number1 = document.getElementById("text1").value;
+	 number2 = document.getElementById("text2").value;
+	 var total=0;
+	 total = parseInt(number1) + parseInt(number2);
+	 document.getElementById("text3").value = total;
+ }
+ function validate()
+ {
+	 var x;
+	 x = document.getElementById("text1").value;
+	 if(x==""){
+		 document.getElementById("text1").style.border = "2px solid red";
+		 alert("Invalid entry");
+	 }
+
+	 var y;
+	 y = document.getElementById("text2").value;
+	 if(y==""){
+		 document.getElementById("text2").style.border = "2px solid red";
+		 alert("Invalid entry");
+	 }
+ }
+ </script>
+ <body>
+ <h3>Sample Javascript Program</h3>
+
+ <p>Enter Your First Number :
+ <input type = "text" id = "text1">
+
+ <p>Enter Your First Number :
+ <input type = "text" id = "text2">
+
+ <p> sum (Answer) : <input type = "text" id = "text3">
+ <p> <input type = "button" value = "Click" onclick = "sum(),validate()"></p>
+  
+ </body>
+</html>

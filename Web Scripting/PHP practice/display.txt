@@ -1,0 +1,4 @@
+<?php
+$query = "select * FROM table1";
+$result = mysql_query($query) or die("Query faild");
+?>

@@ -1,0 +1,14 @@
+<?php
+$x = 5;
+
+function myTest()
+{
+	$y = 10;
+	echo"The value of x is:$x"."<br>";
+	echo"the value of y is:$y"."<br>";
+}
+myTest();
+
+echo"The value of x is:$x"."<br>";
+echo"the value of y is:$y";
+?>

@@ -1,0 +1,80 @@
+<html>
+    <head>
+
+        <title>MODERN COLLEGE</title>
+             <script type="text/javascript">
+
+		  function val()
+		  {
+
+		   if(frm.mobile.value=="")
+		    {
+		      alert("Please enter mobile number");
+		    }
+		   else if(isNaN(frm.mobile.value))
+		    {
+		      alert("Please enter valid mobile number");
+		    }
+		   else if((frm.mobile.value).length > 8)
+		    {
+              alert("Mobile number should not exceed 8 digits");
+		    }
+
+		  }
+	        </script>
+    </head>
+    <body>
+            <h1 align="center" onmouseover="style.color='#0000FF';">MODERN COLLEGE</h1>
+			<img src="logo.png" width="120px" height="120px">
+			<hr>
+
+            <a href="Home.html" onmouseover="style.color='#CC9900';">HOME</a>
+			<a href="login.html" onmouseover="style.color='#CC9900';">LOGIN</a>
+			<a href="registration.html" onmouseover="style.color='#CC9900';">REGISTRATION</a>
+			<a href="programmes.html" onmouseover="style.color='#CC9900';">PROGRAMMES</a>
+			<a href="modules.html" onmouseover="style.color='#CC9900';">DEPARTMENTS</a>
+			<a href="stdperf.html" onmouseover="style.color='#CC9900';">STUDENT PERFORMANCE REPORT</a>
+			<a href="sitemap.html" onmouseover="style.color='#CC9900';">SITE MAP</a>
+			<a href="Help.html" onmouseover="style.color='#CC9900';">HELP</a>
+			<hr>
+			
+            <h3 align="center">REGISTRATION FORM</h3>
+			<br><br>
+
+			<form name="frm">
+			First Name: <input type="text"name="firstname">
+			<br><br>
+			Last Name: <input type="text"name="lastname">
+			<br><br>
+			Mobile. No: <input type="text"name="mobile">
+			<br><br>
+			Country: <select>
+                     <option value="oman">Oman</option>
+				     <option value="india">India</option>
+					 <option value="syria">Syria</option>
+					 <option value="saudiarb">Saudi Arabia</option>
+			         </select>
+				   <br><br>
+		    Gender:<input type="radio" name="gender" value="male"> Male
+			       <input type="radio" name="gender" value="female"> Female
+				   <br><br>
+			Education:
+			<input type ="checkbox" name="education" value="school">
+			School
+			<input type ="checkbox" name="education" value="diploma">
+			Diploma
+			<input type ="checkbox" name="education" value="bachelor">
+			Bachelor
+			<br><br>
+			<input type="submit"value="Submit"onclick="val();">
+			<input type="reset"value="Reset">
+			</form>
+
+            <hr>
+			<img src="facebook.png" width="50px" height="50px">
+			<img src="youtube.jpg" width="50px" height="50px">
+			<img src="twitter.png" width="50px" height="50px">
+
+    </body>
+
+</html>

@@ -1,0 +1,15 @@
+<?php
+$n ="red";
+switch($n)
+{
+	case "red":
+		echo"the flower color is red";
+		break;
+	case "blue":
+		echo"the flower color is red";
+		break;
+	case "green":
+		echo"the flower color is red";
+		break;
+}
+?>

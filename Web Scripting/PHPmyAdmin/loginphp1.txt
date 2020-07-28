@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>  
+<html>
+<Head>
+   <script>
+
+</script>
+<body>  
+
+<?php
+
+echo gmdate("l jS \of F Y ") . "<br>";
+
+
+
+
+/* Connecting, selecting database */
+$link = mysql_connect("localhost", "root","root")
+or die("Could not connect");
+echo "Connected successfully";
+echo "<br>";
+mysql_select_db("newdb") or die("Could not select database");
+
+
+
+// define variables and set to empty values
+$name = $password= $email = $gender =  "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+     $name = test_input($_POST["name"]);
+   
+    	
+  	$password = test_input($_POST["password"]);
+  	
+  	
+    $email = test_input($_POST["email"]);
+   
+ 
+    $gender = test_input($_POST["gender"]);
+  }
+
+
+
+
+function test_input($data) {
+	$data = trim($data);
+	
+	return $data;
+}
+
+
+/* Performing SQL query */
+
+
+	$query = "INSERT INTO users VALUES($name,$password, $email, $gender)";
+	$result = mysql_query($query);
+	
+
+
+
+?>
+
+
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+ 
+ 
+  Name: <input type="text" placeholder="Enter Name" name="name">
+ 
+  <br><br>
+  
+ 
+ 
+   Password: <input type="password" name="password">
+ 
+  <br><br>
+ 
+ 
+  E-mail: <input type="text" placeholder="Enter Email"name="email">
+ 
+  <br><br>
+  
+  Gender:
+  <input type="radio" name="gender" value="female">Female
+  <input type="radio" name="gender" value="male">Male
+  
+  <br><br>
+  
+<input type="submit"  />
+  
+ <?php
+ $query = "INSERT INTO users VALUES('$name','$password', '$email', '$gender')";
+	$result = mysql_query($query) 
+	
+ ?>
+ 
+ 
+</form>
+
+<A HREF="home.html">Back to Start Page</A>
+	</body>
+</html>

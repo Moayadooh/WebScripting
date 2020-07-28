@@ -1,0 +1,9 @@
+<?php
+function web($name){
+	echo"Welcome to Muscat College $name<br>";
+}
+
+web("Amani");
+web("Aysha");
+web("Haitham");
+?>

@@ -1,0 +1,15 @@
+<?php
+$t = 11;
+if($t>10)
+{
+	echo "The value is grater than 10";
+}
+else if ($t<10)
+{
+	echo "The value is less than 10";
+}
+else
+{
+	echo "The value is not within limit";
+}
+	?>

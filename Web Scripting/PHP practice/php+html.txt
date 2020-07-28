@@ -1,0 +1,13 @@
+
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+
+    <body>
+    <h1>Muscat College</h1>
+    <?php
+echo'muscat college in oman'
+	?>
+    </body>
+</html>
