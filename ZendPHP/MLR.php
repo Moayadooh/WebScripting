@@ -10,10 +10,13 @@ if(!$link){
     die("Unable to connect".mysqli_error($link));
 }
 else{
-    $query = "SELECT temp_level, soil_mois_level, water_amount FROM records;";
+    $plant_id = 1;
+    $date_time = date("Y-m-d H:i:s");
+    
+    $query = "SELECT temp_level, soil_mois_level, water_amount FROM trends where plant_id = '$plant_id' and sensors_status = 'ON';";
     $result = mysqli_query($link, $query);
     if(!$result)
-        die("Unable to retrieve".mysqli_error($link));
+        die("Unable to retrieve ".mysqli_error($link));
     else
     {
         $N = 0;
@@ -50,46 +53,51 @@ else{
             $yTotal += $y;
             $x1x2 += $x1 * $x2;
         }
-        if($N==0)
-            echo "No Records";
+        $x1Mean = $x1Total / $N;
+        $x2Mean = $x2Total / $N;
+        $yMean = $yTotal / $N;
+        
+        $x1SquareTotal = $x1SquareTotal - $x1Total * $x1Total / $N;
+        $x2SquareTotal = $x2SquareTotal - $x2Total * $x2Total / $N;
+        
+        $x1y = $x1y - $x1Total * $yTotal / $N;
+        $x2y = $x2y - $x2Total * $yTotal / $N;
+        $x1x2 = $x1x2 - $x1Total * $x2Total / $N;
+        
+        if(($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2)==0)
+            $b1 = 0;
         else
-        {
-            $x1Mean = $x1Total / $N;
-            $x2Mean = $x2Total / $N;
-            $yMean = $yTotal / $N;
-            
-            $x1SquareTotal = $x1SquareTotal - $x1Total * $x1Total / $N;
-            $x2SquareTotal = $x2SquareTotal - $x2Total * $x2Total / $N;
-            
-            $x1y = $x1y - $x1Total * $yTotal / $N;
-            $x2y = $x2y - $x2Total * $yTotal / $N;
-            $x1x2 = $x1x2 - $x1Total * $x2Total / $N;
-            
             $b1 = ($x2SquareTotal * $x1y - $x1x2 * $x2y) / ($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2);
+        if(($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2)==0)
+            $b2 = 0;
+        else
             $b2 = ($x1SquareTotal * $x2y - $x1x2 * $x1y) / ($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2);
-            $b0 = $yMean - $b1 * $x1Mean - $b2 * $x2Mean;
-            
-            $query = "SELECT avg(temp_level) AS average FROM records ORDER BY trend_id DESC LIMIT 5;";
-            $result = mysqli_query($link, $query);
-            if(!$result)
-                die("Unable to retrieve".mysqli_error($link));
-            $row = mysqli_fetch_assoc($result);
-            $x1 = $row['average'];
-            //$x1 = 37.2;
-            echo $x1.'<br>';
-            
-            $query = "SELECT avg(soil_mois_level) AS average FROM records ORDER BY trend_id DESC LIMIT 5;";
-            $result = mysqli_query($link, $query);
-            if(!$result)
-                die("Unable to retrieve".mysqli_error($link));
-            $row = mysqli_fetch_assoc($result);
-            $x2 = $row['average'];
-            //$x2 = 5.8;
-            echo $x2.'<br>';
-            
-            $y = $b0 + $b1 * $x1 + $b2 * $x2;
-            echo $y;
-        }
+        $b0 = $yMean - $b1 * $x1Mean - $b2 * $x2Mean;
+        
+        /*$b1 = ($x2SquareTotal * $x1y - $x1x2 * $x2y) / ($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2);
+        $b2 = ($x1SquareTotal * $x2y - $x1x2 * $x1y) / ($x1SquareTotal * $x2SquareTotal - $x1x2 * $x1x2);
+        $b0 = $yMean - $b1 * $x1Mean - $b2 * $x2Mean;*/
+        
+        $query = "SELECT avg(temp_level) AS average FROM trends ORDER BY trend_id DESC LIMIT 5;";
+        $result = mysqli_query($link, $query);
+        if(!$result)
+            die("Unable to retrieve ".mysqli_error($link));
+        $row = mysqli_fetch_assoc($result);
+        $x1 = $row['average'];
+        
+        $query = "SELECT avg(soil_mois_level) AS average FROM trends ORDER BY trend_id DESC LIMIT 5;";
+        $result = mysqli_query($link, $query);
+        if(!$result)
+            die("Unable to retrieve ".mysqli_error($link));
+        $row = mysqli_fetch_assoc($result);
+        $x2 = $row['average'];
+        
+        $y = $b0 + $b1 * $x1 + $b2 * $x2;
+        $query = "INSERT INTO trends (plant_id,temp_level,soil_mois_level,water_amount,sensors_status,date_time) VALUES ('$plant_id','$x1','$x2','$y','OFF','$date_time');";
+        $result = mysqli_query($link, $query);
+        if(!$result)
+            die("Unable to insert".mysqli_error($link));
+        echo $y;
     }
 }
 mysqli_close($link);
